@@ -11,6 +11,7 @@ app.all('*', function(request, response) {
     var url = request.url;
     var opts = URL.parse(url);
     opts.headers = request.headers;
+    delete opts.headers['proxy-connection'];
     opts.method = request.method;
 
     console.log('proxy:', request.method, url);
