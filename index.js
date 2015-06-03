@@ -4,9 +4,17 @@ var colors = require('colors');
 var express = require('express');
 var app = express();
 
-app.use(express.static('public'));
+// app.get('/', function (req, res) {
+//     res.sendFile(__dirname + '/public/index.html');
+// });
 
-app.all('*', function(request, response) {
+// app.use(express.static('public'));
+
+app.all('*', function(request, response, next) {
+    if (request.url.indexOf('/') === 0) {
+        next();
+        return ;
+    }
     console.log(request.connection.remoteAddress);
     var url = request.url;
     var opts = URL.parse(url);
@@ -38,9 +46,13 @@ app.all('*', function(request, response) {
     });
 });
 
+// handle
+app.use(express.static('public'));
+
 var server = app.listen(3000, function() {
     var host = server.address().address;
     var port = server.address().port;
 
     console.log('server start'.green, host + ':' + port);
 });
+
