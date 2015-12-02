@@ -1,0 +1,29 @@
+{
+  "name": "NodeHttpWatch",
+  "description": "http watch",
+  "main": "index.js",
+  "authors": [
+    "Maxwin"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "httpwatch",
+    "charles",
+    "fiddler"
+  ],
+  "homepage": "https://github.com/Maxwin-z/NodeHttpWatch",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6"
+  }
+}
