@@ -3,12 +3,10 @@ var net = require('net');
 
 var getHostPortFromString = require("./utils");
 
-var debugging = true;
+var debugging = false;
 
 var listener = function httpUserRequest(userRequest, userResponse) {
-    if (debugging) {
-        console.log('  > request: %s', userRequest.url);
-    }
+    console.log('  > request: %s', userRequest.url);
 
     var httpVersion = userRequest['httpVersion'];
     var hostport = getHostPortFromString(userRequest.headers['host'], 80);

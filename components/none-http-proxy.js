@@ -3,7 +3,7 @@ var net = require('net');
 
 var getHostPortFromString = require("./utils");
 
-var debugging = true;
+var debugging = false;
 
 var listener = function(request, socketRequest, bodyhead) {
     console.log('request.url', request.url);

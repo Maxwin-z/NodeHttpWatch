@@ -35,3 +35,11 @@ var server = app.listen(3000, function() {
     console.log('server start'.green, host + ':' + port);
 });
 
+// create proxy server
+
+var noneHttpProxy = require('./components/none-http-proxy');
+var httpProxy = require('./components/http-proxy');
+
+var proxyServer = http.createServer(httpProxy).listen(8888);
+proxyServer.on('connect', noneHttpProxy);
+
