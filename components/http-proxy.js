@@ -1,12 +1,25 @@
 var http = require('http');
 var net = require('net');
 
+var Code = require('../public/js/code');
+var MQ = require('./message-queue');
+
 var getHostPortFromString = require("./utils");
 
 var debugging = false;
 
+function getUid(req) {
+    return "test";
+}
+
 var listener = function httpUserRequest(userRequest, userResponse) {
     console.log('  > request: %s', userRequest.url);
+    var uid = getUid(userRequest);
+
+    MQ.addMsg(uid, {
+        code: Code.RequestStart,
+        data: userRequest.headers
+    });
 
     var httpVersion = userRequest['httpVersion'];
     var hostport = getHostPortFromString(userRequest.headers['host'], 80);
