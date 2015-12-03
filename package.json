@@ -30,6 +30,7 @@
     "cookie-parser": "^1.4.0",
     "express": "^4.12.4",
     "koa": "^1.1.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "webpack": "^1.12.9"
   }
 }
