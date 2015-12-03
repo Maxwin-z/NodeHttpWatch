@@ -24,6 +24,7 @@
   "homepage": "https://github.com/Maxwin-z/NodeHttpWatch",
   "devDependencies": {
     "colors": "^1.1.0",
+    "file-loader": "^0.8.5",
     "html-webpack-plugin": "^1.7.0",
     "underscore": "^1.8.3"
   },

@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var providePlugin = new webpack.ProvidePlugin({
     $: "jquery",
@@ -52,5 +53,9 @@ module.exports = {
     plugins: [
         new CommonsChunkPlugin('vendor', "vendor.js"),
         providePlugin,
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: '../index.html'
+        })
     ]
 };
