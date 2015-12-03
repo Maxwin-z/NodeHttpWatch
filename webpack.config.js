@@ -9,42 +9,31 @@ var providePlugin = new webpack.ProvidePlugin({
     _: 'underscore',
 });
 
-var context = __dirname;
+var context = path.join(__dirname, '/');
+
+var jqueryPath = path.join(context, '/bower_components/jquery/jquery-2.1.4/dist/jquery.js');
+var underscorePath = path.join(context, '/bower_components/underscore/underscore-1.8.3/underscore.js');
+var bootstrapPath = path.join(context, '/bower_components/bootstrap/dist/js/bootstrap.js');
+var reactPrefix = path.join(context, '/bower_components/react/react-bower-0.14.3/');
 
 module.exports = {
     context: context,
     entry: {
         vendor: [
-            './components/jquery',
-            './lib/underscore',
-            './lib/bootstrap',
+            jqueryPath,
+            underscorePath,
+            bootstrapPath
         ],
 
-        // 'index': './index.js',
-        'add-user': './pages/add-user.js',
-        'departments': './pages/departments.js',
-        'groups': './pages/groups.js',
-        'login': './pages/login.js',
-        'relationship': './pages/relationship.js',
-        'renlifang-index': './pages/renlifang-index.js',
-        'renlifang-profile': './pages/renlifang-profile.js',
-        'renlifang-search': './pages/renlifang-search.js',
-        'role-manager': './pages/role-manager.js',
-        'user-authority': './pages/user-authority.js',
+        'index': './src/index.js',
     },
     output: {
-        path:  path.join(__dirname, '_build/js/'),
+        path:  path.join(__dirname, 'public/js/'),
         publicPath: '/js/',
         filename: '[name].js'
     },
     module: {
-        loaders: [{
-            test: /\.html?$/,
-            loader: 'tpl-loader'
-        }, {
-            test: /jquery\.js$/,
-            loader: 'expose?$!expose?jQuery'
-        }]
+        loaders: []
     },
     resolveLoader: {
         alias: {
@@ -55,18 +44,13 @@ module.exports = {
         // modulesDirectories: ['js'],
         extensions: ["", ".js", ".html"],
         alias: {
-            'jquery': context + 'lib/jquery',
-            'underscore': context + 'lib/underscore',
-            'bootstrap': context + 'lib/bootstrap',
+            'jquery': jqueryPath,
+            'react': path.join(reactPrefix, '/react.js'),
+            'react-dom': path.join(reactPrefix, '/react-dom.js')
         }
     },
     plugins: [
         new CommonsChunkPlugin('vendor', "vendor.js"),
         providePlugin,
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
     ]
 };

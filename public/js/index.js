@@ -1,10 +1,8 @@
-function loop() {
-    $.getJSON('/loop', function(data) {
-        var code = $('<code>');
-        code.append(JSON.stringify(data, true, 4));
-        $('#logs').append(code);
-        setTimeout(loop, 1);
-    });
-}
+webpackJsonp([0],[
+/* 0 */
+/***/ function(module, exports) {
 
-loop();
+	index.js
+
+/***/ }
+]);
