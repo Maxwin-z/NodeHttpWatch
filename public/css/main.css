@@ -25,6 +25,11 @@ body {
 	width: 50%;
 }
 
+#left td {
+	padding-left: 2px;
+	padding-right: 0px;
+}
+
 #splitter {
 	width: 6px;
 	background-color: #ccc;
