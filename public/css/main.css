@@ -23,6 +23,7 @@ body {
 
 #left {
 	width: 50%;
+	overflow-x: hidden;
 }
 
 #left td {
