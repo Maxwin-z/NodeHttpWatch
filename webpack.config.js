@@ -30,7 +30,7 @@ module.exports = {
         'index': path.join(context, 'src/js/index.jsx'),
     },
     output: {
-        path:  path.join(__dirname, 'public/js/'),
+        path: path.join(__dirname, 'public/js/'),
         publicPath: '/js/',
         filename: '[name].js'
     },
@@ -40,12 +40,14 @@ module.exports = {
             loader: 'babel'
         }, {
             test: /\.css$/,
-            loader: 'css-loader'
+            loader: 'style-loader!css-loader'
+        }, {
+            test: /\.(otf|eot|svg|ttf|woff)/,
+            loader: 'url-loader?limit=8192'
         }]
     },
     resolveLoader: {
-        alias: {
-        }
+        alias: {}
     },
     resolve: {
         root: [context],
