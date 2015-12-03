@@ -1,7 +1,7 @@
 var http = require('http');
 var net = require('net');
 
-var Code = require('../public/js/code');
+var Code = require('./code');
 var MQ = require('./message-queue');
 
 var getHostPortFromString = require("./utils");

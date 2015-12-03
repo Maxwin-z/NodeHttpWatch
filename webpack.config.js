@@ -11,6 +11,7 @@ var providePlugin = new webpack.ProvidePlugin({
 });
 
 var context = path.join(__dirname, '/');
+console.log(context);
 
 var jqueryPath = path.join(context, '/bower_components/jquery/jquery-2.1.4/dist/jquery.js');
 var underscorePath = path.join(context, '/bower_components/underscore/underscore-1.8.3/underscore.js');
@@ -26,7 +27,7 @@ module.exports = {
             bootstrapPath
         ],
 
-        'index': './src/index.js',
+        'index': path.join(context, 'src/js/index.jsx'),
     },
     output: {
         path:  path.join(__dirname, 'public/js/'),
@@ -34,7 +35,13 @@ module.exports = {
         filename: '[name].js'
     },
     module: {
-        loaders: []
+        loaders: [{
+            test: /\.jsx$/,
+            loader: 'babel'
+        }, {
+            test: /\.css$/,
+            loader: 'css-loader'
+        }]
     },
     resolveLoader: {
         alias: {
@@ -43,7 +50,7 @@ module.exports = {
     resolve: {
         root: [context],
         // modulesDirectories: ['js'],
-        extensions: ["", ".js", ".html"],
+        extensions: ["", ".js", ".jsx", ".html", "css"],
         alias: {
             'jquery': jqueryPath,
             'react': path.join(reactPrefix, '/react.js'),
