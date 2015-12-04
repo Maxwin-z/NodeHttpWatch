@@ -32,3 +32,14 @@ var [a, ,b] = [1,2,3];
 
 console.log(a, b);
 
+function foo(a = 1) {
+	console.log(a);
+}
+
+foo();
+
+function g({name: x}) {
+  console.log(x);
+}
+g({name: 5})
+
