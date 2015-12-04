@@ -1,5 +1,6 @@
 var URL = require('url');
 var http = require('http');
+var path = require('path');
 var colors = require('colors');
 var express = require('express');
 var app = express();
@@ -25,7 +26,27 @@ app.all('*', function(request, response, next) {
 
 app.use('/loop', require('./routers/loop'));
 
-// handle
+// webpack
+var webpackDevMiddleware = require("webpack-dev-middleware");
+var webpack = require("webpack");
+
+var config = require("./webpack.config.js");
+var compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, {
+    contentBase: path.join(__dirname, 'public'),
+    hot: true,
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+    },
+    stats: {
+        colors: true
+    },
+    publicPath: '/js/',
+    noInfo: false,
+    quiet: false,
+}));
+
 app.use(express.static('public'));
 
 var server = app.listen(3000, function() {
@@ -42,4 +63,3 @@ var httpProxy = require('./components/http-proxy');
 
 var proxyServer = http.createServer(httpProxy).listen(8888);
 proxyServer.on('connect', noneHttpProxy);
-

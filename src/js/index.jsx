@@ -4,42 +4,26 @@ require('src/css/main.css');
 
 require('babel-polyfill/dist/polyfill');
 
-function* gen() {
-	yield 1;
-	yield 2;
-	yield 3;
-	yield 4;
-}
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-var o = gen();
-console.log(o.next());
-console.log(o.next());
-console.log(o.next());
-console.log(o.next());
+class CommentBox extends React.Component {
+    displayName() {
+        return 'hi';
+    }
 
-var obj = {
-	name: 'obj',
-	foo: function () {
-		(() => {
-			console.log(this.name);
-		})();
-	}
-}
+    render() {
+        return (
+            <div className="commentBox">
+              {'Hello, world! I am a CommentBox.'} {this.displayName()}
+            </div>  
+        );
+    }
+};
+ReactDOM.render(
+    <CommentBox />,
+    document.getElementById('right')
+);
 
-obj.foo();
-
-var [a, ,b] = [1,2,3];
-
-console.log(a, b);
-
-function foo(a = 1) {
-	console.log(a);
-}
-
-foo();
-
-function g({name: x}) {
-  console.log(x);
-}
-g({name: 5})
-
+var [a, b] = [1, 2];
+console.log(1, 2);
