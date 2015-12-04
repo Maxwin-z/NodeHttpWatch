@@ -3,6 +3,8 @@ var path = require('path');
 
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var babelPolyfillExtractTextPlugin = require("extract-text-webpack-plugin");
+
 
 var providePlugin = new webpack.ProvidePlugin({
     $: "jquery",
@@ -36,8 +38,14 @@ module.exports = {
     },
     module: {
         loaders: [{
+            test: /polyfill.js$/,
+            loader: babelPolyfillExtractTextPlugin.extract('raw-loader')
+        }, {
             test: /\.jsx$/,
-            loader: 'babel'
+            loader: 'babel',
+            query: {
+                presets: ['es2015']
+            }
         }, {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
@@ -50,7 +58,7 @@ module.exports = {
         alias: {}
     },
     resolve: {
-        root: [context],
+        root: [context, path.join(context, 'node_modules')],
         // modulesDirectories: ['js'],
         extensions: ["", ".js", ".jsx", ".html", "css"],
         alias: {
@@ -65,6 +73,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html',
             filename: '../index.html'
-        })
+        }),
+        new babelPolyfillExtractTextPlugin("polyfill.js")
     ]
 };

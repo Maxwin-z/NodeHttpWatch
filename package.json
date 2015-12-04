@@ -32,10 +32,14 @@
     "underscore": "^1.8.3"
   },
   "dependencies": {
+    "babel-polyfill": "^6.2.0",
     "cookie-parser": "^1.4.0",
     "css-loader": "^0.23.0",
+    "expose": "^0.1.4",
     "express": "^4.12.4",
+    "extract-text-webpack-plugin": "^0.9.1",
     "koa": "^1.1.1",
+    "raw-loader": "^0.5.1",
     "style-loader": "^0.13.0",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
