@@ -33,6 +33,8 @@
     "underscore": "^1.8.3"
   },
   "dependencies": {
+    "babel-plugin-react-transform": "^1.1.1",
+    "babel-plugin-transform-class-properties": "^6.3.13",
     "babel-polyfill": "^6.2.0",
     "cookie-parser": "^1.4.0",
     "css-loader": "^0.23.0",
@@ -46,10 +48,13 @@
     "gulp-watch": "^4.3.5",
     "koa": "^1.1.1",
     "raw-loader": "^0.5.1",
+    "react-transform-catch-errors": "^1.0.0",
+    "react-transform-hmr": "^1.0.1",
     "style-loader": "^0.13.0",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
-    "webpack-dev-middleware": "^1.4.0"
+    "webpack-dev-middleware": "^1.4.0",
+    "webpack-hot-middleware": "^2.6.0"
   }
 }

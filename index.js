@@ -45,6 +45,8 @@ app.use(webpackDevMiddleware(compiler, {
     quiet: false
 }));
 
+app.use(require('webpack-hot-middleware')(compiler));
+
 app.use(express.static('public'));
 
 var server = app.listen(3000, function() {
