@@ -7,7 +7,7 @@ var ReactDOM = require('react-dom');
 
 class CommentBox extends React.Component {
   displayName() {
-    return 'hi';
+    return 'max';
   }
 
   render() {
@@ -17,11 +17,10 @@ class CommentBox extends React.Component {
             </div>
     );
   }
-};
+}
+
 ReactDOM.render(
   <CommentBox />,
   document.getElementById('right')
 );
 
-var [a, b] = [1, 2];
-console.log(1, 2);
