@@ -1,12 +1,12 @@
 {
- "env": {
+  "env": {
     "browser": true,
     "node": true,
     "es6": true
   },
   "plugins": [
     "react",
-     "html"
+    "html"
   ],
   extends: "eslint:recommended",
   "ecmaFeatures": {
@@ -45,6 +45,89 @@
     "react/require-extension": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,
-    "react/wrap-multilines": 1
+    "react/wrap-multilines": 1,
+    "accessor-pairs": 2,
+    "complexity": 0,
+    "consistent-return": 2,
+    "curly": 2,
+    "default-case": 2,
+    "dot-notation": 2,
+    "dot-location": [
+      2,
+      "property"
+    ],
+    "eqeqeq": 2,
+    "guard-for-in": 2,
+    "no-alert": 1,
+    "no-console": 1,
+    "no-caller": 2,
+    "no-div-regex": 2,
+    "no-else-return": 2,
+    "no-empty-label": 2,
+    "no-eq-null": 2,
+    "no-eval": 2,
+    "no-extend-native": 2,
+    "no-extra-bind": 2,
+    "no-fallthrough": 2,
+    "no-floating-decimal": 2,
+    "no-implicit-coercion": 0,
+    "no-implied-eval": 2,
+    "no-invalid-this": 2,
+    "no-iterator": 2,
+    "no-labels": 2,
+    "no-lone-blocks": 2,
+    "no-loop-func": 2,
+    "no-multi-spaces": 2,
+    "no-multi-str": 2,
+    "no-native-reassign": 2,
+    "no-new-func": 2,
+    "no-new-wrappers": 2,
+    "no-new": 2,
+    "no-octal-escape": 2,
+    "no-octal": 2,
+    "no-param-reassign": 0,
+    "no-process-env": 1,
+    "no-proto": 2,
+    "no-redeclare": [
+      2, {
+        "builtinGlobals": true
+      }
+    ],
+    "no-return-assign": [
+      2,
+      "always"
+    ],
+    "no-script-url": 2,
+    "no-self-compare": 0,
+    "no-sequences": 2,
+    "no-throw-literal": 2,
+    "no-unused-expressions": 2,
+    "no-useless-call": 2,
+    "no-useless-concat": 2,
+    "no-void": 0,
+    "no-warning-comments": [
+      1, {
+        "terms": [
+          "todo",
+          "warning",
+          "fixme",
+          "hack",
+          "xxx"
+        ],
+        "location": "start"
+      }
+    ],
+    "no-with": 2,
+    "radix": 2,
+    "wrap-iife": [
+      2,
+      "inside"
+    ],
+    "yoda": [
+      2,
+      "never", {
+        "exceptRange": true
+      }
+    ]
   }
 }

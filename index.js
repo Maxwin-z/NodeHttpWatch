@@ -1,7 +1,5 @@
-var URL = require('url');
 var http = require('http');
 var path = require('path');
-var colors = require('colors');
 var express = require('express');
 var app = express();
 
@@ -16,9 +14,9 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 app.all('*', function(request, response, next) {
-    console.log(request.cookies);
     var cookies = request.cookies;
-    if (cookies['uid'] == null) {
+    console.log(request.cookies);
+    if (cookies.uid === null) {
         response.cookie('uid', 'o' + Date.now() + Math.random());
     }
     next();
@@ -44,7 +42,7 @@ app.use(webpackDevMiddleware(compiler, {
     },
     publicPath: '/js/',
     noInfo: false,
-    quiet: false,
+    quiet: false
 }));
 
 app.use(express.static('public'));

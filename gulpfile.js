@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
+var shell = require('gulp-shell');
+var rimraf = require('rimraf');
 var webpack = require("webpack");
 
 gulp.task('html', function() {
@@ -20,12 +22,20 @@ gulp.task('webpack', function(callback) {
   }));
 
   webpack(require('./webpack.config.js'), function(err, stats) {
-    if (err) throw new gutil.PluginError("webpack", err);
+    if (err) {
+      throw new gutil.PluginError("webpack", err);
+    }
     gutil.log("[webpack]", stats.toString({}));
     callback();
   });
 });
 
-alert('done');
+gulp.task('express', shell.task([
+  'supervisor -w index.js,route,components -- index.js'
+]));
 
-gulp.task('default', ['html']);
+gulp.task('clean', function (cb) {
+  rimraf('public', cb);
+});
+
+gulp.task('default', ['html', 'express']);

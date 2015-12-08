@@ -9,12 +9,10 @@ var babelPolyfillExtractTextPlugin = require("extract-text-webpack-plugin");
 var providePlugin = new webpack.ProvidePlugin({
     $: "jquery",
     jQuery: "jquery",
-    _: 'underscore',
+    _: 'underscore'
 });
 
 var context = path.join(__dirname, '/');
-console.log(context);
-
 var jqueryPath = path.join(context, '/bower_components/jquery/jquery-2.1.4/dist/jquery.js');
 var underscorePath = path.join(context, '/bower_components/underscore/underscore-1.8.3/underscore.js');
 var bootstrapPath = path.join(context, '/bower_components/bootstrap/dist/js/bootstrap.js');
@@ -31,7 +29,7 @@ module.exports = {
 
         'polyfill': path.join(context, 'node_modules/babel-polyfill/dist/polyfill'),
 
-        'index': path.join(context, 'src/js/index.jsx'),
+        'index': path.join(context, 'src/js/index.jsx')
     },
     output: {
         path: path.join(__dirname, 'public/js/'),
