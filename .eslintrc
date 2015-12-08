@@ -8,6 +8,7 @@
     "react",
      "html"
   ],
+  extends: "eslint:recommended",
   "ecmaFeatures": {
     "jsx": true
   },

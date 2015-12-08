@@ -2,27 +2,25 @@ require('bower_components/bootstrap/dist/css/bootstrap.css');
 require('bower_components/bootstrap/dist/css/bootstrap-theme.css');
 require('src/css/main.css');
 
-require('babel-polyfill/dist/polyfill');
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 
 class CommentBox extends React.Component {
-    displayName() {
-        return 'hi';
-    }
+  displayName() {
+    return 'hi';
+  }
 
-    render() {
-        return (
-            <div className="commentBox">
+  render() {
+    return (
+      <div className="commentBox">
               {'Hello, world! I am a CommentBox.'} {this.displayName()}
-            </div>  
-        );
-    }
+            </div>
+    );
+  }
 };
 ReactDOM.render(
-    <CommentBox />,
-    document.getElementById('right')
+  <CommentBox />,
+  document.getElementById('right')
 );
 
 var [a, b] = [1, 2];

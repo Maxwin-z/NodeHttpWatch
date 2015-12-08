@@ -29,6 +29,8 @@ module.exports = {
             bootstrapPath
         ],
 
+        'polyfill': path.join(context, 'node_modules/babel-polyfill/dist/polyfill'),
+
         'index': path.join(context, 'src/js/index.jsx'),
     },
     output: {
