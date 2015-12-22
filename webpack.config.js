@@ -50,7 +50,7 @@ module.exports = {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
     }, {
-      test: /\.(otf|eot|svg|ttf|woff)/,
+      test: /\.(otf|eot|svg|ttf|woff|gif)/,
       loader: 'url-loader?limit=8192'
     }]
   },
@@ -64,7 +64,8 @@ module.exports = {
     alias: {
       'jquery': jqueryPath,
       'react': path.join(reactPrefix, '/react.js'),
-      'react-dom': path.join(reactPrefix, '/react-dom.js')
+      'react-dom': path.join(reactPrefix, '/react-dom.js'),
+      'react-dom-server': path.join(reactPrefix, '/react-dom-server.js')
     }
   },
   plugins: [

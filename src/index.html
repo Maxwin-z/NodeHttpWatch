@@ -37,43 +37,7 @@
 
     <div id="main" class="container">
         <div id="left">
-            <table class="table table-striped">
-                <tr>
-                    <td>GET</td>
-                    <td>200</td>
-                    <td>www.maxwin.me</td>
-                    <td><a href="#">/path</a>
-                    </td>
-                    <td>40ms</td>
-                    <td>22:03:01</td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>200</td>
-                    <td>www.maxwin.me</td>
-                    <td><a href="#">/path</a>
-                    </td>
-                    <td>40ms</td>
-                    <td>22:03:01</td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>200</td>
-                    <td>www.maxwin.me</td>
-                    <td><a href="#">/path</a>
-                    </td>
-                    <td>40ms</td>
-                    <td>22:03:01</td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>200</td>
-                    <td>www.maxwin.me</td>
-                    <td><a href="#">/bower/spec/blob/master/json.md</a>
-                    </td>
-                    <td>40ms</td>
-                    <td>22:03:01</td>
-                </tr>
+            <table id="records-table" class="table table-striped">
             </table>
         </div>
         <div id="splitter"></div>
@@ -83,5 +47,18 @@
     </div>
 </body>
 
+<script type="text/template" id="tpl-record">
+    <tr id="record-<%- id %>">
+        <td class="start"><%- start %></td>
+        <td class="elapse"></td>
+        <td class="method"><%- method %></td>
+        <td class="code"></td>
+        <td class="host"><%- hostname %></td>
+        <td>
+            <a href="javascript:void(0);" class="path"><%- path %></a>
+        </td>
+    </tr>
+</script>
 <script type="text/javascript" src="/js/index.js"></script>
+
 </html>

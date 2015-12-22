@@ -6,6 +6,8 @@ var MQ = require('./message-queue');
 
 var getHostPortFromString = require("./utils");
 
+var recordId = 0;
+
 var debugging = false;
 
 function getUid(req) {
@@ -13,20 +15,15 @@ function getUid(req) {
 }
 
 var listener = function httpUserRequest(userRequest, userResponse) {
+    var id = ++recordId;
     console.log('  > request: %s', userRequest.url);
     var uid = getUid(userRequest);
 
-    MQ.addMsg(uid, {
-        code: Code.RequestStart,
-        data: userRequest.headers
-    });
-
-    var httpVersion = userRequest['httpVersion'];
-    var hostport = getHostPortFromString(userRequest.headers['host'], 80);
+    var hostport = getHostPortFromString(userRequest.headers.host, 80);
 
     // have to extract the path from the requested URL
     var path = userRequest.url;
-    result = /^[a-zA-Z]+:\/\/[^\/]+(\/.*)?$/.exec(userRequest.url);
+    var result = /^[a-zA-Z]+:\/\/[^\/]+(\/.*)?$/.exec(userRequest.url);
     if (result) {
         if (result[1].length > 0) {
             path = result[1];
@@ -45,6 +42,11 @@ var listener = function httpUserRequest(userRequest, userResponse) {
         'headers': userRequest.headers
     };
 
+    MQ.addMsg(uid, {
+        code: Code.RequestStart,
+        data: options
+    });
+
     if (debugging) {
         console.log('  > options: %s', JSON.stringify(options, null, 2));
     }
@@ -53,7 +55,7 @@ var listener = function httpUserRequest(userRequest, userResponse) {
         options,
         function(proxyResponse) {
             if (debugging) {
-                console.log('  > request headers: %s', JSON.stringify(options['headers'], null, 2));
+                console.log('  > request headers: %s', JSON.stringify(options.headers, null, 2));
             }
 
             if (debugging) {

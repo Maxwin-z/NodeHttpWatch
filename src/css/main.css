@@ -15,6 +15,11 @@ html, body {
 
 #left {
 	width: 50%;
+	height: 100%;
+	overflow: auto;
+}
+#records-table {
+	width: 100%;
 }
 
 #splitter {
@@ -25,3 +30,11 @@ html, body {
 #right {
 	flex: 1;
 }
+
+.loading {
+	background-image: url('../img/loader.gif');
+	background-size: 16px auto;
+	width: 16px;
+	height: 16px;
+}
+

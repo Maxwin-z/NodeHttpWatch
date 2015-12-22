@@ -2,6 +2,7 @@ var http = require('http');
 var path = require('path');
 var express = require('express');
 var app = express();
+var _ = require('underscore');
 
 var cookieParser = require('cookie-parser');
 
@@ -16,8 +17,11 @@ app.use(cookieParser());
 app.all('*', function(request, response, next) {
     var cookies = request.cookies;
     console.log(request.cookies);
-    if (cookies.uid === null) {
-        response.cookie('uid', 'o' + Date.now() + Math.random());
+    if (_.isEmpty(cookies.uid)) {
+        console.log('set cookie');
+        response.cookie('uid', 'o' + Date.now() + Math.random(), {
+            path: '/'
+        });
     }
     next();
 });
