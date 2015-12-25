@@ -70,7 +70,7 @@ function handleMessage(message) {
 
 function renderRecord(record) {
     var dom = $('#record-' + record.id);
-    if (dom.length === 0) {
+    if (dom.length === 0 && record.status === Code.RequestStart) {
         dom = initRecordDom(record);
     }
 
