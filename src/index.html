@@ -42,20 +42,42 @@
         </div>
         <div id="splitter"></div>
         <div id="right">
-            right
+            <label for="text-url">URL</label>
+            <textarea id="text-url" type="text" class="form-control" placeholder="..."></textarea>
+
+            <label for="text-request-headers">Request headers</label>
+            <textarea id="text-request-headers" type="text" class="form-control" placeholder="..."></textarea>
+
+            <label for="text-request-body">Request body</label>
+            <textarea id="text-request-body" type="text" class="form-control" placeholder="..."></textarea>
+
+            <label for="text-request-headers">Response headers</label>
+            <textarea id="text-response-headers" type="text" class="form-control" placeholder="..."></textarea>
+
+            <label for="text-request-headers">Response body</label>
+            <textarea id="text-response-body" type="text" class="form-control" placeholder="..."></textarea>
+
         </div>
     </div>
 </body>
 
 <script type="text/template" id="tpl-record">
     <tr id="record-<%- id %>">
-        <td class="start"><%- start %></td>
+        <td class="start">
+            <%- start %>
+        </td>
         <td class="elapse"></td>
-        <td class="method"><%- method %></td>
+        <td class="method">
+            <%- method %>
+        </td>
         <td class="code"></td>
-        <td class="host"><%- hostname %></td>
+        <td class="host">
+            <%- hostname %>
+        </td>
         <td>
-            <a href="javascript:void(0);" class="path"><%- path %></a>
+            <a href="javascript:void(0);" class="path">
+                <%- path %>
+            </a>
         </td>
     </tr>
 </script>

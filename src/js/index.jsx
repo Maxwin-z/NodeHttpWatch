@@ -22,6 +22,9 @@ var Record = {
     responseBody: 'base64 data'
 }
 
+// entry
+loop();
+
 function loop() {
     $.getJSON('/loop')
         .done(messages => {
@@ -41,6 +44,7 @@ function handleMessage(message) {
     var record = records[id] || {
         id: id
     };
+    records[id] = record;
     record.status = message.code;
 
     switch (message.code) {
@@ -51,7 +55,8 @@ function handleMessage(message) {
             record.requestBody = data;
             break;
         case Code.ResponseStart:
-            record.responseHeaders = data;
+            record.statusCode = data.statusCode;
+            record.responseHeaders = data.headers;
             break;
         case Code.ResponseEnd:
             record.responseBody = data;
@@ -66,22 +71,38 @@ function handleMessage(message) {
 function renderRecord(record) {
     var dom = $('#record-' + record.id);
     if (dom.length === 0) {
-        var method = record.requestHeaders.method;
-        var host = record.requestHeaders.host;
-        var port = record.requestHeaders.port;
-        var path = record.requestHeaders.path;
-
-        dom = $(RecordTpl({
-            id: record.id,
-            method: method,
-            hostname: host + (port === 80 ? '' : ':' + port),
-            path: path,
-            start: formatTime()
-        }));
-        recordTable.append(dom);
-
-        dom.find('.elapse').append($('<div class="loading">'));
+        dom = initRecordDom(record);
     }
+
+    if (record.status === Code.ResponseStart) {
+        dom.find('.code').html(record.statusCode);
+    }
+
+    if (record.status === Code.ResponseEnd) {
+        dom.find('.elapse').html('');
+    }
+}
+
+function initRecordDom(record) {
+    var method = record.requestHeaders.method;
+    var host = record.requestHeaders.host;
+    var port = record.requestHeaders.port;
+    var path = record.requestHeaders.path;
+
+    var dom = $(RecordTpl({
+        id: record.id,
+        method: method,
+        hostname: host + (port === 80 ? '' : ':' + port),
+        path: path,
+        start: formatTime()
+    }));
+    recordTable.append(dom);
+
+    dom.find('.elapse').append($('<div class="loading">'));
+    dom.find('a').click(function () {
+        detail(record.id);
+    })
+    return dom;
 }
 
 function formatTime(date = new Date()) {
@@ -95,4 +116,22 @@ function formatTime(date = new Date()) {
     return [hour, min, sec].join(':');
 }
 
-loop();
+function detail(id) {
+    console.log(records[id]);
+    var record = records[id];
+    var host = record.requestHeaders.host;
+    var port = record.requestHeaders.port;
+    var path = record.requestHeaders.path;
+    var url = 'http://' + host + (port === 80 ? '' : ':' + port) + path;
+
+    $('#text-url').val(url).fixheight();
+    $('#text-request-headers').val(JSON.stringify(record.requestHeaders.headers, true, 4)).fixheight();
+    $('#text-request-body').val(record.requestBody).fixheight();
+    $('#text-response-headers').val(JSON.stringify(record.responseHeaders, true, 4)).fixheight();
+    $('#text-response-body').val(record.responseBody).fixheight();
+}
+
+$.fn.fixheight = function () {
+    var el = $(this);
+    el.height(el.get(0).scrollHeight);
+}

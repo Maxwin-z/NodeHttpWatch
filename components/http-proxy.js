@@ -16,7 +16,11 @@ function getUid(req) {
 
 var listener = function httpUserRequest(userRequest, userResponse) {
     var id = ++recordId;
+    var requestBuffer = new Buffer(0);
+    var responseBuffer = new Buffer(0);
+
     console.log('  > request: %s', userRequest.url);
+
     var uid = getUid(userRequest);
 
     var hostport = getHostPortFromString(userRequest.headers.host, 80);
@@ -43,6 +47,7 @@ var listener = function httpUserRequest(userRequest, userResponse) {
     };
 
     MQ.addMsg(uid, {
+        id: id,
         code: Code.RequestStart,
         data: options
     });
@@ -67,6 +72,15 @@ var listener = function httpUserRequest(userRequest, userResponse) {
                 proxyResponse.headers
             );
 
+            MQ.addMsg(uid, {
+                id: id,
+                code: Code.ResponseStart,
+                data: {
+                    statusCode: proxyResponse.statusCode,
+                    headers: proxyResponse.headers
+                }
+            })
+
             proxyResponse.on(
                 'data',
                 function(chunk) {
@@ -74,6 +88,7 @@ var listener = function httpUserRequest(userRequest, userResponse) {
                         console.log('  < chunk = %d bytes', chunk.length);
                     }
                     userResponse.write(chunk);
+                    responseBuffer = Buffer.concat([responseBuffer, chunk]);
                 }
             );
 
@@ -84,6 +99,11 @@ var listener = function httpUserRequest(userRequest, userResponse) {
                         console.log('  < END');
                     }
                     userResponse.end();
+                    MQ.addMsg(uid, {
+                        id: id,
+                        code: Code.ResponseEnd,
+                        data: responseBuffer.toString('base64')
+                    })
                 }
             );
         }
@@ -108,6 +128,7 @@ var listener = function httpUserRequest(userRequest, userResponse) {
             if (debugging) {
                 console.log('  > chunk = %d bytes', chunk.length);
             }
+            requestBuffer = Buffer.concat([requestBuffer, chunk]);
             proxyRequest.write(chunk);
         }
     );
@@ -116,6 +137,11 @@ var listener = function httpUserRequest(userRequest, userResponse) {
         'end',
         function() {
             proxyRequest.end();
+            MQ.addMsg(uid, {
+                id: id,
+                code: Code.RequestEnd,
+                data: requestBuffer.toString('base64')
+            })
         }
     );
 }
