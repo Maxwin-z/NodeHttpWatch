@@ -133,5 +133,5 @@ function detail(id) {
 
 $.fn.fixheight = function () {
     var el = $(this);
-    el.height(el.get(0).scrollHeight);
+    el.height(0).height((el.get(0).scrollHeight));
 }
