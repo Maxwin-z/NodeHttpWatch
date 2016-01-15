@@ -16,8 +16,14 @@ router.get('/loop', function (req, res) {
 });
 
 router.post('/parse', function (req, res) {
-	var decoder = req.body.decoder;
-	res.end('parse');
+	var decode = req.body.decode;
+	var record = req.body.record;
+	var decoder = require('../decoder/' + decode);
+	console.log(decoder);
+	decoder.decode(record.requestHeaders.path, record.responseBody, function (err, data) {
+		res.end(data || err);
+	}, record.requestHeaders.headers, record.responseHeaders);
+	// res.end('parse' + data);
 });
 
 module.exports = router;

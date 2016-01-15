@@ -55,8 +55,25 @@
             <textarea id="text-response-headers" type="text" class="form-control" placeholder="..."></textarea>
 
             <label for="text-request-headers">Response body</label>
-            <textarea id="text-response-body" type="text" class="form-control" placeholder="..."></textarea>
+            <!--textarea id="text-response-body" type="text" class="form-control" placeholder="..."></textarea -->
+            <div id="response-box">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" data-decode="plain" class="active"><a href="#response-plain" aria-controls="response-plain" role="tab" data-toggle="tab">Plain</a>
+                    </li>
+                    <li role="presentation" data-decode="image"><a href="#response-image" aria-controls="response-image" role="tab" data-toggle="tab">Image</a>
+                    </li>
+                </ul>
 
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="response-plain">
+                        <textarea type="text" class="form-control" placeholder="..."></textarea>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="response-image">
+                        <img />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

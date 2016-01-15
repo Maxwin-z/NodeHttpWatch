@@ -6,6 +6,7 @@ var Code = require('components/code');
 var RecordTpl = _.template($('#tpl-record').html().trim());
 var recordTable = $('#records-table');
 var records = {};
+var currentRecord = null;
 
 var Record = {
     id: 123,
@@ -124,6 +125,10 @@ function detail(id) {
     var path = record.requestHeaders.path;
     var url = 'http://' + host + (port === 80 ? '' : ':' + port) + path;
 
+    currentRecord = record;
+    $('#response-box a[href="#response-plain"]').tab('show')
+    doParse();
+
     $('#text-url').val(url).fixheight();
     $('#text-request-headers').val(JSON.stringify(record.requestHeaders.headers, true, 4)).fixheight();
     $('#text-request-body').val(record.requestBody).fixheight();
@@ -134,4 +139,31 @@ function detail(id) {
 $.fn.fixheight = function () {
     var el = $(this);
     el.height(0).height((el.get(0).scrollHeight));
+    return el;
 }
+
+
+$('#response-box a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+    doParse($(e.target).parent().attr('data-decode'));
+})
+
+function doParse(decode) {
+    decode = decode || $('#response-box > ul > li.active').attr('data-decode');
+    console.log(decode);
+    if (!currentRecord) return ;
+
+    if (decode == 'image') {
+        $('#response-' + decode + ' img').attr('src', 'data:image/png;base64,' + currentRecord.responseBody);
+        return ;
+    }
+
+    $.post('/api/parse', {
+        decode: decode,
+        record: currentRecord
+    }, function (data) {
+        var textarea = $('#response-' + decode + ' textarea');
+        textarea.val(data).fixheight();
+    })
+}
+
+

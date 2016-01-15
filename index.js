@@ -5,6 +5,7 @@ var app = express();
 var _ = require('underscore');
 
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
 // app.get('/', function (req, res) {
 //     res.sendFile(__dirname + '/public/index.html');
@@ -13,6 +14,10 @@ var cookieParser = require('cookie-parser');
 // app.use(express.static('public'));
 
 app.use(cookieParser());
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 app.all('*', function(request, response, next) {
     var cookies = request.cookies;

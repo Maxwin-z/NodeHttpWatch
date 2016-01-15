@@ -31,7 +31,7 @@ gulp.task('webpack', function(callback) {
 });
 
 gulp.task('express', shell.task([
-  'supervisor -w index.js,route,components -- index.js'
+  'supervisor -w index.js,routers,components -- index.js'
 ]));
 
 gulp.task('clean', function (cb) {

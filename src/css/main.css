@@ -37,3 +37,13 @@ html, body {
 textarea {
     resize: vertical;
 }
+
+#response-box {
+    margin-top: 10px;
+}
+
+#response-box textarea {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
