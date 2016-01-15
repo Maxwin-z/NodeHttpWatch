@@ -4,7 +4,7 @@ var net = require('net');
 var Code = require('./code');
 var MQ = require('./message-queue');
 
-var getHostPortFromString = require("./utils");
+var getHostPortFromString = require("./utils").getHostPortFromString;
 
 var recordId = 0;
 

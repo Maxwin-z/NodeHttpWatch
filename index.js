@@ -26,7 +26,7 @@ app.all('*', function(request, response, next) {
     next();
 });
 
-app.use('/loop', require('./routers/loop'));
+app.use('/api', require('./routers/api'));
 
 // webpack
 var webpackDevMiddleware = require("webpack-dev-middleware");

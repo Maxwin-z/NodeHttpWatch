@@ -26,7 +26,7 @@ var Record = {
 loop();
 
 function loop() {
-    $.getJSON('/loop')
+    $.getJSON('/api/loop')
         .done(messages => {
             _.each(messages, handleMessage);
             setTimeout(loop, 0);

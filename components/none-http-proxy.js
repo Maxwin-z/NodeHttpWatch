@@ -1,7 +1,7 @@
 var http = require('http');
 var net = require('net');
 
-var getHostPortFromString = require("./utils");
+var getHostPortFromString = require("./utils").getHostPortFromString;
 
 var debugging = false;
 
