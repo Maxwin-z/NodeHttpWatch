@@ -34,7 +34,6 @@
             <!--/.nav-collapse -->
         </div>
     </nav>
-
     <div id="main" class="container">
         <div id="left">
             <table id="records-table" class="table table-striped">
@@ -44,16 +43,12 @@
         <div id="right">
             <label for="text-url">URL</label>
             <textarea id="text-url" type="text" class="form-control" placeholder="..."></textarea>
-
             <label for="text-request-headers">Request headers</label>
             <textarea id="text-request-headers" type="text" class="form-control" placeholder="..."></textarea>
-
             <label for="text-request-body">Request body</label>
             <textarea id="text-request-body" type="text" class="form-control" placeholder="..."></textarea>
-
             <label for="text-request-headers">Response headers</label>
             <textarea id="text-response-headers" type="text" class="form-control" placeholder="..."></textarea>
-
             <label for="text-request-headers">Response body</label>
             <!--textarea id="text-response-body" type="text" class="form-control" placeholder="..."></textarea -->
             <div id="response-box">
@@ -63,7 +58,6 @@
                     <li role="presentation" data-decode="image"><a href="#response-image" aria-controls="response-image" role="tab" data-toggle="tab">Image</a>
                     </li>
                 </ul>
-
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="response-plain">
@@ -77,24 +71,25 @@
         </div>
     </div>
 </body>
-
 <script type="text/template" id="tpl-record">
     <tr id="record-<%- id %>">
-        <td class="start">
-            <%- start %>
-        </td>
-        <td class="elapse"></td>
-        <td class="method">
-            <%- method %>
-        </td>
-        <td class="code"></td>
-        <td class="host">
-            <%- hostname %>
-        </td>
         <td>
-            <a href="javascript:void(0);" class="path">
-                <%- path %>
-            </a>
+            <span class="start">
+                <%- start %>
+            </span>
+            <span class="elapse"></span>
+            <span class="method">
+                <%- method %>
+            </span>
+            <span class="code"></span>
+            <span class="host">
+                <%- hostname %>
+            </span>
+            <span>
+                <a href="javascript:void(0);" class="path">
+                    <%- path %>
+                </a>
+            </span>
         </td>
     </tr>
 </script>

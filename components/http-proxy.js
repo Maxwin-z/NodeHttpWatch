@@ -3,8 +3,11 @@ var net = require('net');
 
 var Code = require('./code');
 var MQ = require('./message-queue');
+var Util = require('./utils');
 
-var getHostPortFromString = require("./utils").getHostPortFromString;
+var getHostPortFromString = Util.getHostPortFromString;
+
+http.globalAgent.maxSockets = 1000;
 
 var recordId = 0;
 
@@ -36,6 +39,11 @@ var listener = function httpUserRequest(userRequest, userResponse) {
         }
     }
 
+    // disable cache
+    Util.setHeader(userRequest.headers, 'if-modified-since', null);
+    Util.setHeader(userRequest.headers, 'if-none-match', null);
+
+
     var options = {
         'host': hostport[0],
         'port': hostport[1],
@@ -45,7 +53,6 @@ var listener = function httpUserRequest(userRequest, userResponse) {
         'auth': userRequest.auth,
         'headers': userRequest.headers
     };
-
     MQ.addMsg(uid, {
         id: id,
         code: Code.RequestStart,

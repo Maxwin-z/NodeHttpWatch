@@ -3,6 +3,7 @@ require('bower_components/bootstrap/dist/css/bootstrap-theme.css');
 require('src/css/main.css');
 
 var Code = require('components/code');
+var Util = require('components/utils');
 var RecordTpl = _.template($('#tpl-record').html().trim());
 var recordTable = $('#records-table');
 var records = {};
@@ -97,13 +98,24 @@ function initRecordDom(record) {
         path: path,
         start: formatTime()
     }));
+    var needScroll = shouldScrollToBottom();
     recordTable.append(dom);
+    if (needScroll) {
+        $('#left').scrollTop($('#left').get(0).scrollHeight);
+    }
 
-    dom.find('.elapse').append($('<div class="loading">'));
+    dom.find('.elapse').append($('<span class="loading">'));
     dom.find('a').click(function () {
         detail(record.id);
     })
     return dom;
+}
+
+function shouldScrollToBottom() {
+    var threshold = 50;
+    var el = $('#left');
+    var contentHeight = el.get(0).scrollHeight;
+    return contentHeight - el.height() - el.scrollTop() < threshold;
 }
 
 function formatTime(date = new Date()) {
@@ -126,14 +138,23 @@ function detail(id) {
     var url = 'http://' + host + (port === 80 ? '' : ':' + port) + path;
 
     currentRecord = record;
-    $('#response-box a[href="#response-plain"]').tab('show')
+    autoSelectDecode(record);
     doParse();
 
     $('#text-url').val(url).fixheight();
     $('#text-request-headers').val(JSON.stringify(record.requestHeaders.headers, true, 4)).fixheight();
     $('#text-request-body').val(record.requestBody).fixheight();
     $('#text-response-headers').val(JSON.stringify(record.responseHeaders, true, 4)).fixheight();
-    $('#text-response-body').val(record.responseBody).fixheight();
+    // $('#text-response-body').val(record.responseBody).fixheight();
+}
+
+function autoSelectDecode(record) {
+    var type = Util.getHeader(record.responseHeaders, 'content-type');
+    if (type.indexOf('image/') === 0) {
+        $('#response-box a[href="#response-image"]').tab('show')
+    } else {
+        $('#response-box a[href="#response-plain"]').tab('show')
+    }
 }
 
 $.fn.fixheight = function () {

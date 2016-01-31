@@ -19,6 +19,10 @@ html, body {
 #records-table {
     width: 100%;
 }
+#records-table td {
+    word-break: break-all;
+    width: 100%; 
+}
 #splitter {
     width: 6px;
     background-color: #c0c0d0;
@@ -31,6 +35,7 @@ html, body {
 .loading {
     background-image: url('../img/loader.gif');
     background-size: 16px auto;
+    display: inline-block;
     width: 16px;
     height: 16px;
 }
@@ -46,4 +51,9 @@ textarea {
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+#response-image img {
+    max-width: 90%;
+    margin: 10px;
 }

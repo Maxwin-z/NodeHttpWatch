@@ -35,7 +35,11 @@ function setHeader(headers, key, val) {
     var tk = key.toLowerCase();
     var notset = _.every(headers, function(v, k) {
         if (k.toLowerCase() === tk) {
-            headers[k] = val;
+            if (val === null) {
+                delete headers[k];
+            } else {
+                headers[k] = val;
+            }
             return false;
         } else {
             return true;
@@ -43,7 +47,11 @@ function setHeader(headers, key, val) {
     });
 
     if (notset) {
-        headers[key] = val;
+        if (val === null) {
+            delete headers[key];
+        } else {
+            headers[key] = val;
+        }
     }
 }
 
@@ -52,5 +60,3 @@ module.exports = {
     getHeader: getHeader,
     setHeader: setHeader
 };
-
-
