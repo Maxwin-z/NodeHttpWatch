@@ -14,7 +14,7 @@ var context = path.join(__dirname, '/');
 var jqueryPath = path.join(context, '/bower_components/jquery/dist/jquery.js');
 var underscorePath = path.join(context, '/bower_components/underscore/underscore.js');
 var bootstrapPath = path.join(context, '/bower_components/bootstrap/dist/js/bootstrap.js');
-var reactPrefix = path.join(context, '/bower_components/react/react-bower-0.14.3/');
+var reactPrefix = path.join(context, '/bower_components/react/');
 
 module.exports = {
   context: context,
