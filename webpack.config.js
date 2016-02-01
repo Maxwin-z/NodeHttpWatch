@@ -29,7 +29,8 @@ module.exports = {
     'index': [
       path.join(context, 'src/js/index.jsx')
       /* , 'webpack-hot-middleware/client'*/
-    ]
+    ],
+    'config': path.join(context, 'src/js/config.jsx')
   },
   output: {
     path: path.join(__dirname, 'public/js/'),
